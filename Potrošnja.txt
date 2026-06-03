@@ -1,0 +1,85 @@
+Napravi jednostavnu web aplikaciju za internu upotrebu restorana koja služi isključivo za evidentiranje pića koja su uzeta iz zaliha za potrebe kuhinje ili osoblja, a nisu evidentirana kroz redovnu prodaju.
+Aplikacija mora biti maksimalno jednostavna, brza i prilagođena korištenju na mobilnom telefonu.
+Osnovna ideja
+Na početnom ekranu prikazati kartice sa sljedećim pićima:
+•  Sprite 
+•  Coca Cola 
+•  Coca Cola Zero 
+•  Fanta 
+•  Jamnica 
+•  Aqua Panna Velika 
+•  Aqua Panna Mala 
+•  San Pellegrino Velika 
+•  San Pellegrino Mala 
+•  Voćni Sokovi 
+•  Crno Vino 
+•  Bijelo Vino 
+•  Ballantine's 
+•  Vodka
+Svako piće prikazati kao karticu sa slikom ili jednostavnom 3D ikonicom boce.
+Kada korisnik klikne na piće, otvara se mali prozor za unos.
+Potrebni podaci za unos
+Vrsta potrošnje:
+•  Kuhinja 
+•  Konobari 
+Količina:
+•  Mala čaša (100 ml) 
+•  Koktel čaša (300 ml) 
+•  Velika čaša (500 ml) 
+•  Boca 1 litar
+Opcionalno polje:
+Napomena
+Primjer:
+•  Sos 
+•  Rižoto 
+•  Degustacija 
+•  Osoblje 
+•  Ostalo 
+Dugme:
+"Evidentiraj"
+Klikom na dugme sačuvati:
+•  Datum 
+•  Vrijeme 
+•  Piće 
+•  Količinu 
+•  Da li je uzeto za kuhinju ili konobare 
+•  Napomenu 
+Istorija
+Napraviti stranicu "Istorija".
+Prikazati jednostavnu tabelu:
+•  Datum 
+•  Vrijeme 
+•  Piće 
+•  Količina 
+•  Kuhinja / Konobari 
+•  Napomena
+Omogućiti:
+•  Pretragu 
+•  Brisanje zapisa 
+•  Ispravku zapisa 
+Mjesečni izvještaji
+Napraviti stranicu "Izvještaji".
+Korisnik bira mjesec.
+Prikazati:
+Za svako piće:
+•  Ukupno potrošeno 
+Posebno prikazati:
+Kuhinja:
+•  Ukupna količina po piću 
+Konobari:
+•  Ukupna količina po piću 
+Na kraju prikazati:
+•  Ukupna potrošnja za kuhinju 
+•  Ukupna potrošnja za konobare 
+•  Ukupna potrošnja svih pića 
+Dodati dugme:
+"Preuzmi PDF"
+PDF treba sadržavati isti pregled za izabrani mjesec.
+Dizajn
+•  Tamna tema 
+•  Velika dugmad 
+•  Mobile first 
+•  Što manje klikova 
+•  Jednostavan i pregledan interfejs 
+•  Fokus na brz unos podataka 
+Najvažnije pravilo: zaposlenik mora moći evidentirati uzeto piće za manje od 5 sekundi. Nisu potrebni grafikoni, analitika, KPI kartice, statistike niti komplikovane funkcije. Samo brzo evidentiranje, istorija unosa i mjesečni izvještaji.

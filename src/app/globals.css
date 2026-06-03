@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/* Dark theme design tokens. Tailwind v4 @theme turns these into color
+   utilities (bg-base, text-ink, border-line, bg-accent, ...). */
+@theme {
+  --color-base: #0b0f14; /* page background */
+  --color-surface: #151b23; /* cards, sheets */
+  --color-surface-2: #1e2630; /* raised / unselected segment */
+  --color-line: #2a3440; /* borders */
+  --color-ink: #e6edf3; /* primary text */
+  --color-muted: #9aa7b4; /* secondary text */
+  --color-accent: #22c55e; /* confirm / primary action */
+  --color-accent-press: #16a34a;
+  --color-danger: #ef4444; /* destructive */
+  --color-danger-press: #dc2626;
+
+  --radius-card: 1rem;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  color-scheme: dark; /* native controls (month input, scrollbars) render dark */
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background: var(--color-base);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent; /* no blue flash on tap */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Respect the on-screen keyboard / notches via safe-area helpers used in JSX. */
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.toast-pop {
+  animation: toast-in 0.18s ease-out;
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.sheet-pop {
+  animation: sheet-in 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fade-in 0.15s ease-out;
+}

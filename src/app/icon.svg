@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Potrošnja">
+  <rect width="512" height="512" rx="112" fill="#0b0f14"/>
+  <rect x="300" y="104" width="22" height="220" rx="11" transform="rotate(20 311 214)" fill="#e6edf3"/>
+  <polygon points="168,156 344,156 318,396 194,396" fill="#1e2630" stroke="#2a3440" stroke-width="9"/>
+  <polygon points="184,256 328,256 318,396 194,396" fill="#22c55e"/>
+  <circle cx="232" cy="206" r="11" fill="#2a3440"/>
+  <circle cx="272" cy="226" r="8" fill="#2a3440"/>
+  <circle cx="244" cy="236" r="6" fill="#2a3440"/>
+</svg>
