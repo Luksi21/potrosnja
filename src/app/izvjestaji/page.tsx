@@ -3,14 +3,16 @@
 import { useMemo, useState } from "react";
 import { Download, FileDown, Upload } from "lucide-react";
 import { useEntries } from "@/hooks/useEntries";
-import { buildMonthReport } from "@/lib/aggregate";
-import { currentMonth, formatLiters, monthLabel } from "@/lib/format";
+import { buildMonthReport, type DrinkTotal } from "@/lib/aggregate";
+import { currentMonth, formatQty, monthLabel } from "@/lib/format";
 import { downloadMonthPdf } from "@/lib/pdf";
 import { exportJson, importJson } from "@/lib/backup";
 import { MonthPicker } from "@/components/MonthPicker";
 import { ReportTable } from "@/components/ReportTable";
 import { EmptyState } from "@/components/EmptyState";
 import { useToast } from "@/components/Toast";
+
+const sumCount = (rows: DrinkTotal[]) => rows.reduce((s, r) => s + r.count, 0);
 
 function TotalRow({
   label,
@@ -111,31 +113,54 @@ export default function IzvjestajiPage() {
           <ReportTable
             title="Ukupno — sva potrošnja"
             rows={report.perDrink}
+            totalCount={report.count}
             totalMl={report.totalMl}
           />
           <ReportTable
             title="Kuhinja"
             rows={report.kuhinja}
+            totalCount={sumCount(report.kuhinja)}
             totalMl={report.totalKuhinjaMl}
           />
           <ReportTable
             title="Konobari"
             rows={report.konobari}
+            totalCount={sumCount(report.konobari)}
             totalMl={report.totalKonobariMl}
+          />
+          <ReportTable
+            title="Lana"
+            rows={report.lana}
+            totalCount={sumCount(report.lana)}
+            totalMl={report.totalLanaMl}
+          />
+          <ReportTable
+            title="Dražen"
+            rows={report.drazen}
+            totalCount={sumCount(report.drazen)}
+            totalMl={report.totalDrazenMl}
           />
 
           <div className="rounded-2xl border border-line bg-surface p-4">
             <TotalRow
               label="Ukupno Kuhinja"
-              value={formatLiters(report.totalKuhinjaMl)}
+              value={formatQty(sumCount(report.kuhinja), report.totalKuhinjaMl)}
             />
             <TotalRow
               label="Ukupno Konobari"
-              value={formatLiters(report.totalKonobariMl)}
+              value={formatQty(sumCount(report.konobari), report.totalKonobariMl)}
+            />
+            <TotalRow
+              label="Ukupno Lana"
+              value={formatQty(sumCount(report.lana), report.totalLanaMl)}
+            />
+            <TotalRow
+              label="Ukupno Dražen"
+              value={formatQty(sumCount(report.drazen), report.totalDrazenMl)}
             />
             <TotalRow
               label="UKUPNO SVE"
-              value={formatLiters(report.totalMl)}
+              value={formatQty(report.count, report.totalMl)}
               strong
             />
           </div>

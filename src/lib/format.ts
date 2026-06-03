@@ -23,6 +23,11 @@ export function formatLiters(ml: number): string {
   })} L`;
 }
 
+/** Report quantity: count in "kom", plus liters when there is any volume. */
+export function formatQty(count: number, ml: number): string {
+  return ml > 0 ? `${count} kom · ${formatLiters(ml)}` : `${count} kom`;
+}
+
 /** Epoch ms → "dd.MM.yyyy." (local). */
 export function formatDate(ts: number): string {
   const d = new Date(ts);

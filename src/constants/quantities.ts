@@ -6,6 +6,8 @@ export const QUANTITIES: QuantityOption[] = [
   { id: "koktel", label: "Koktel čaša (300 ml)", short: "300 ml", ml: 300 },
   { id: "velika", label: "Velika čaša (500 ml)", short: "500 ml", ml: 500 },
   { id: "boca", label: "Boca 1 litar", short: "1 L", ml: 1000 },
+  // Unit/piece count — for drinks logged as whole items (cans, cups, bottles).
+  { id: "komad", label: "Komad (1 kom)", short: "1 kom", ml: 0 },
 ];
 
 export const QTY_BY_ID: Record<QuantityId, QuantityOption> = Object.fromEntries(

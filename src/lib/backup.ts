@@ -2,7 +2,7 @@ import type { Entry, QuantityId } from "@/types";
 import { storage } from "@/lib/storage";
 import { toLocalDay } from "@/lib/format";
 
-const VALID_QTY: QuantityId[] = ["mala", "koktel", "velika", "boca"];
+const VALID_QTY: QuantityId[] = ["mala", "koktel", "velika", "boca", "komad"];
 
 /** Download all entries as a JSON backup file. */
 export function exportJson(): void {

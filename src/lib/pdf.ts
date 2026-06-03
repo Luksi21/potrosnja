@@ -1,10 +1,12 @@
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import type { DrinkTotal, MonthReport } from "@/lib/aggregate";
-import { formatLiters, monthLabel } from "@/lib/format";
+import { formatQty, monthLabel } from "@/lib/format";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const FONT = "DejaVuSans";
+
+const sumCount = (rows: DrinkTotal[]) => rows.reduce((s, r) => s + r.count, 0);
 
 let fontPromise: Promise<string | null> | null = null;
 
@@ -54,7 +56,7 @@ export async function downloadMonthPdf(report: MonthReport): Promise<void> {
   doc.text(`Izvještaj potrošnje — ${monthLabel(report.month)}`, marginX, 50);
 
   let y = 80;
-  const section = (title: string, rows: DrinkTotal[], totalMl: number) => {
+  const section = (title: string, rows: DrinkTotal[]) => {
     doc.setFont(font, "normal");
     doc.setFontSize(12);
     doc.text(title, marginX, y);
@@ -62,9 +64,17 @@ export async function downloadMonthPdf(report: MonthReport): Promise<void> {
       startY: y + 10,
       head: [["Piće", "Količina"]],
       body: rows.length
-        ? rows.map((r) => [r.name, formatLiters(r.ml)])
-        : [["Nema unosa", formatLiters(0)]],
-      foot: [["Ukupno", formatLiters(totalMl)]],
+        ? rows.map((r) => [r.name, formatQty(r.count, r.ml)])
+        : [["Nema unosa", formatQty(0, 0)]],
+      foot: [
+        [
+          "Ukupno",
+          formatQty(
+            sumCount(rows),
+            rows.reduce((s, r) => s + r.ml, 0),
+          ),
+        ],
+      ],
       theme: "grid",
       styles: { font, fontStyle: "normal", fontSize: 10, textColor: [25, 25, 25] },
       headStyles: {
@@ -85,18 +95,47 @@ export async function downloadMonthPdf(report: MonthReport): Promise<void> {
     y = finalY(doc) + 28;
   };
 
-  section("Ukupno — sva potrošnja", report.perDrink, report.totalMl);
-  section("Kuhinja", report.kuhinja, report.totalKuhinjaMl);
-  section("Konobari", report.konobari, report.totalKonobariMl);
+  section("Ukupno — sva potrošnja", report.perDrink);
+  section("Kuhinja", report.kuhinja);
+  section("Konobari", report.konobari);
+  section("Lana", report.lana);
+  section("Dražen", report.drazen);
+
+  // Keep the totals block together on a page.
+  const pageH = doc.internal.pageSize.getHeight();
+  if (y + 100 > pageH) {
+    doc.addPage();
+    y = 50;
+  }
 
   doc.setFont(font, "normal");
   doc.setFontSize(12);
-  doc.text(`Ukupno Kuhinja:  ${formatLiters(report.totalKuhinjaMl)}`, marginX, y);
+  doc.text(
+    `Ukupno Kuhinja:  ${formatQty(sumCount(report.kuhinja), report.totalKuhinjaMl)}`,
+    marginX,
+    y,
+  );
   y += 18;
-  doc.text(`Ukupno Konobari:  ${formatLiters(report.totalKonobariMl)}`, marginX, y);
+  doc.text(
+    `Ukupno Konobari:  ${formatQty(sumCount(report.konobari), report.totalKonobariMl)}`,
+    marginX,
+    y,
+  );
+  y += 18;
+  doc.text(
+    `Ukupno Lana:  ${formatQty(sumCount(report.lana), report.totalLanaMl)}`,
+    marginX,
+    y,
+  );
+  y += 18;
+  doc.text(
+    `Ukupno Dražen:  ${formatQty(sumCount(report.drazen), report.totalDrazenMl)}`,
+    marginX,
+    y,
+  );
   y += 18;
   doc.setFontSize(13);
-  doc.text(`UKUPNO SVE:  ${formatLiters(report.totalMl)}`, marginX, y);
+  doc.text(`UKUPNO SVE:  ${formatQty(report.count, report.totalMl)}`, marginX, y);
 
   doc.save(`izvjestaj-${report.month}.pdf`);
 }

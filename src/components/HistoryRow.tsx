@@ -40,7 +40,12 @@ export function HistoryRow({
           <span aria-hidden>•</span>
           <span
             className={
-              entry.consumer === "kuhinja" ? "text-amber-400" : "text-sky-400"
+              {
+                kuhinja: "text-amber-400",
+                konobari: "text-sky-400",
+                lana: "text-violet-400",
+                drazen: "text-rose-400",
+              }[entry.consumer]
             }
           >
             {CONSUMER_LABEL[entry.consumer]}

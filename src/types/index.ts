@@ -1,6 +1,12 @@
-export type Consumer = "kuhinja" | "konobari";
+export type Consumer = "kuhinja" | "konobari" | "lana" | "drazen";
 
-export type DrinkCategory = "soda" | "water" | "juice" | "wine" | "spirit";
+export type DrinkCategory =
+  | "soda"
+  | "water"
+  | "juice"
+  | "wine"
+  | "spirit"
+  | "coffee";
 
 export interface Drink {
   id: string; // stable slug, e.g. "coca-cola-zero"
@@ -10,7 +16,7 @@ export interface Drink {
   category: DrinkCategory;
 }
 
-export type QuantityId = "mala" | "koktel" | "velika" | "boca";
+export type QuantityId = "mala" | "koktel" | "velika" | "boca" | "komad";
 
 export interface QuantityOption {
   id: QuantityId;

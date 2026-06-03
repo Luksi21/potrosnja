@@ -48,6 +48,18 @@ export const DRINKS: Drink[] = [
   },
   { id: "ballantines", name: "Ballantine's", color: "#0E5A2B", category: "spirit" },
   { id: "vodka", name: "Vodka", color: "#4A6275", category: "spirit" },
+  // Added from the May 2026 consumption log (not in the original list).
+  { id: "tonic", name: "Tonic", color: "#5E7382", category: "soda" },
+  {
+    id: "tonic-schweppes",
+    name: "Tonic Schweppes",
+    color: "#C9A227",
+    textColor: "#1a1a1a",
+    category: "soda",
+  },
+  { id: "schweppes-bitter", name: "Schweppes Bitter", color: "#B23A48", category: "soda" },
+  { id: "cappuccino", name: "Cappuccino", color: "#6F4E37", category: "coffee" },
+  { id: "espresso", name: "Espresso", color: "#3B2417", category: "coffee" },
 ];
 
 export const DRINK_BY_ID: Record<string, Drink> = Object.fromEntries(
